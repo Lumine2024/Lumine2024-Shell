@@ -1,0 +1,3 @@
+@PYTHON@ tests/helpers/echo_stdin.py < tests/fixtures/redirect/input.txt > build/test-artifacts/redirect/stdout.txt
+@PYTHON@ -c "import sys; sys.stderr.write(input())" < tests/fixtures/redirect/input.txt 2> build/test-artifacts/redirect/stderr.txt
+@PYTHON@ -c "import sys; data = input(); sys.stdout.write(data); sys.stderr.write(data)" < tests/fixtures/redirect/input.txt &> build/test-artifacts/redirect/combined.txt

@@ -1,0 +1,24 @@
+$msg[string] = "hello"
+$value[int] = 2
+$flag[bool] = true
+
+Write-Output $msg -Add "-world"
+Write-Output $value -Mul 3
+
+if $value -Gt 2 {
+    Write-Output greater
+}
+elif $value -Eq 2 {
+    Write-Output equal
+}
+else {
+    Write-Output smaller
+}
+
+while $value -Lt 5 {
+    Write-Output $value
+    $value = $value -Add 1
+}
+
+Set-Location .
+@PYTHON@ -c "print('external-ok')"
