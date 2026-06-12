@@ -5,3 +5,7 @@ add_executable(lumine2024_shell
     parser.cpp
     types.cpp
 )
+
+install(TARGETS lumine2024_shell
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)

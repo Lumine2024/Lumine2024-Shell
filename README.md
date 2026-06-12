@@ -19,6 +19,50 @@
 - 格式化字符串
 - 非 ASCII 输入
 
+## Linux 打包、安装与运行
+
+### 依赖
+
+- `git`
+- `cmake`
+- 支持 C++17 的编译器，如 `g++` 或 `clang++`
+- 可选：`ninja`，存在时脚本会优先使用
+
+### 打包为 tar
+
+在仓库根目录执行：
+
+```bash
+bash scripts/package-linux.sh
+```
+
+说明：
+- 该脚本使用 `git archive` 生成 `dist/*.tar`。
+- 为了把当前工作区中的改动也打进包里，脚本会创建一个临时的 Git 快照，但不会修改当前分支历史。
+
+### 从源码包安装
+
+```bash
+tar xf dist/my_shell-<label>.tar
+cd my_shell-<label>
+bash scripts/install-linux.sh
+```
+
+默认会安装到 `~/.local/bin/lumine2024_shell`。如果需要指定安装前缀，可以传入路径：
+
+```bash
+bash scripts/install-linux.sh /usr/local
+```
+
+### 本地直接运行
+
+如果只是想在源码目录里编译并运行，而不安装：
+
+```bash
+bash scripts/run-local.sh
+bash scripts/run-local.sh path/to/script.lsh
+```
+
 ## 语法约束
 
 这个项目优先保证执行功能，不追求复杂 parser，因此语法刻意收紧：
