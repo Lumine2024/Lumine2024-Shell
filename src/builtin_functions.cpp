@@ -32,7 +32,7 @@ void lumine_sh::invoke_builtin(
     (void)input;
     auto value = evaluate_expression(arg_tokens);
     if(name == L"Write-Output") {
-        output << value->stringify() << L'\n' << flush;
+        output << value->stringify() << endl;
         return;
     }
     if(name == L"Set-Location") {

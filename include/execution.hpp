@@ -1,5 +1,7 @@
 #pragma once
 
+#include "pipe.hpp"
+
 #include <memory>
 #include <optional>
 #include <string>
@@ -15,7 +17,7 @@ public:
 
 class PipeableExecution : public BasicExecution {
 public:
-    virtual std::wstring run_pipeline_stage(const std::wstring &input) = 0;
+    virtual void run_pipeline_stage(const PipeEnd *input, const PipeEnd *output) = 0;
 };
 
 using ExecutionList = std::vector<std::shared_ptr<BasicExecution>>;
@@ -39,9 +41,11 @@ public:
         : argv(std::move(_argv)), redirect_io(std::move(_redirect_io)) {}
 
     void execute() override;
-    std::wstring run_pipeline_stage(const std::wstring &input) override;
+    void run_pipeline_stage(const PipeEnd *input, const PipeEnd *output) override;
 
 private:
+    friend class PipelineExecution;
+
     std::vector<std::wstring> argv;
     RedirectIo redirect_io;
 };
@@ -54,7 +58,7 @@ public:
         : name(std::move(_name)), arg_tokens(std::move(_args)) {}
 
     void execute() override;
-    std::wstring run_pipeline_stage(const std::wstring &input) override;
+    void run_pipeline_stage(const PipeEnd *input, const PipeEnd *output) override;
 
 private:
     std::wstring name;
